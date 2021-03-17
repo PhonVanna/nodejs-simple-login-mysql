@@ -1,0 +1,44 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: #563d7c;
+    color: #fff;
+    padding: 30px 60px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+}
+
+nav ul {
+    color: #fff;
+    display: flex !important;
+    justify-content: space-around !important;
+    align-items: center !important;
+}
+
+nav li {
+    list-style: none !important;
+}
+
+nav li a {
+    color: #fff;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    padding: 5px 8px !important;
+}
+
+nav li a:hover {
+    color: yellow !important;
+    text-decoration: none !important;
+}
+
+.avatar-ctn {
+    background-color: orange;
+    text-align: center;
+}
+
+.avatar-ctn .avatar {
+    width: 65%;
+}

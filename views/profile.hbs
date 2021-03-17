@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <nav>
+        <h1>Node Login</h1>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a class="btn btn-danger" href="/auth/logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-4">
+                <div class="card">
+                    <div class="avatar-ctn">
+                        <img src="/avatar.png" alt="user profile" srcset="" class="avatar">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ user.username }}</h5>
+                        <p class="cartd-text">
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat animi ducimus natus,
+                            laborum cumque dolores fuga possimus? Vitae quo excepturi labore?
+                            Quod ullam, reprehenderit expedita natus ipsam qui voluptates corrupti.
+                        </p>
+                        <a href="#" class="btn btn-primary">{{ user.email }}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="card text-center">
+                    <div class="card-header">
+                        Profile Page
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ user.username }}</h5>
+                        <p class="cartd-text">
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat animi ducimus natus,
+                            laborum cumque dolores fuga possimus? Vitae quo excepturi labore?
+                            Quod ullam, reprehenderit expedita natus ipsam qui voluptates corrupti.
+                        </p>
+                        <a href="#" class="btn btn-primary">{{ user.email }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
