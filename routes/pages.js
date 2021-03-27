@@ -9,13 +9,21 @@ router.get('/', authController.isLoggedIn, (req, res) => {
     });
 });
 
-router.get('/register', (req, res) => {
-    res.render("register")
+router.get('/register',  (req, res) => {
+    if(req.cookies.jwt){
+        res.redirect('/profile');
+    }else{
+        res.render("register")
+    }   
 });
 
 
 router.get('/login', (req, res) => {
-    res.render("login")
+    if(req.cookies.jwt){
+        res.redirect('/profile');
+    }else{
+        res.render("login")
+    }   
 });
 
 

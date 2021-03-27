@@ -11,13 +11,7 @@ const db = mysql.createConnection({
 });
 
 exports.register = (req, res) => {
-    console.log(req.body);
     
-    // const name = req.body.name;
-    // const email = req.body.email;
-    // const password = req.body.password;
-    // const passwordConfirm = req.body.passwordConfirm;
-
     const {name, email, password, passwordConfirm } = req.body;
 
     const qrySelect = 'SELECT email FROM users WHERE email = ?';
@@ -41,12 +35,12 @@ exports.register = (req, res) => {
         }
         
         let hashedPassword = await bcrypt.hash(password, 8);
-        console.log(hashedPassword);
+        // console.log(hashedPassword);
         db.query(qryInsert, {username: name, email: email, password: hashedPassword}, (error, results) => {
             if(error) {
                 console.log(error);
             }else{
-                console.log(results);
+                // console.log(results);
                 return res.render('register', {
                     message: 'Successfully Inserted!',
                     code: true
@@ -115,7 +109,7 @@ exports.isLoggedIn = async (req, res, next) => {
                     req.cookies.jwt, 
                     process.env.JWT_SECRET
                 );
-            console.log(decoded);
+            // console.log(decoded);
 
             //check if the user still exist
             db.query("SELECT * FROM users WHERE id = ?", [decoded.id], (error, result) => {
