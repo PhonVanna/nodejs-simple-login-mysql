@@ -80,7 +80,7 @@ exports.login = async (req, res) => {
                     expiresIn: process.env.JWT_EXPIRES_IN
                 });
 
-                console.log('The token is: ' + token);
+                // console.log('The token is: ' + token);
 
                 const cookieOptions = {
                     expires: new Date(
@@ -101,7 +101,7 @@ exports.login = async (req, res) => {
 }
 
 exports.isLoggedIn = async (req, res, next) => {
-    console.log(req.cookies);
+    // console.log(req.cookies);
     if(req.cookies.jwt) {
         try {
             // verify the token
@@ -135,3 +135,4 @@ exports.logout = async (req, res) => {
 
     res.status(200).redirect('/');
 }
+

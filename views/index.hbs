@@ -1,4 +1,30 @@
-<div class="container">
-    <h1>HOme</h1>
-    {{ user.password }}
+<div class="container mt-5 mb-5">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Articles</li>
+        </ol>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            {{#each posts}}
+            <div class="col-sm-4">
+                <div class="card mb-5">
+                    <img src="blog_imgs/{{ post_photo }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <img style="width: 20px; border-radius:50%; margin: 5px;" src="blog_imgs/{{ post_photo }}"
+                            alt="{{ post_photo }}"><small>Author: Vanna</small>
+                        <h5 class="card-title mt-2">
+                            {{ post_title }}
+                        </h5>
+                        <p class="card-text">{{ post_description }}</p>
+                        <a href="/views/{{id}}" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
 </div>

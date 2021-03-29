@@ -1,36 +1,111 @@
 <div class="container mt-4">
     <div class="row">
-        <div class="col-4">
+        <div class="col-3">
             <div class="card">
                 <div class="avatar-ctn">
                     <img src="/avatar.png" alt="user profile" srcset="" class="avatar">
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">{{ user.username }}</h5>
-                    <p class="cartd-text">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat animi ducimus natus,
-                        laborum cumque dolores fuga possimus? Vitae quo excepturi labore?
-                        Quod ullam, reprehenderit expedita natus ipsam qui voluptates corrupti.
-                    </p>
+                    <h3 class="card-title">User: {{ user.username }}</h3>
+                    <h3>Role: {{ user.role }}</h3>
                     <a href="#" class="btn btn-primary">{{ user.email }}</a>
                 </div>
             </div>
         </div>
-        <div class="col-8">
-            <div class="card text-center">
-                <div class="card-header">
-                    Profile Page
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{ user.username }}</h5>
-                    <p class="cartd-text">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat animi ducimus natus,
-                        laborum cumque dolores fuga possimus? Vitae quo excepturi labore?
-                        Quod ullam, reprehenderit expedita natus ipsam qui voluptates corrupti.
-                    </p>
-                    <a href="#" class="btn btn-primary">{{ user.email }}</a>
+        <div class="col-9">
+
+            <div class="container mb-5">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="card text-center">
+                            <div class="card-header">
+                                Total Posts
+                            </div>
+                            <div class="card-body">
+                                <h2 class="card-title">1</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="card text-center">
+                            <div class="card-header">
+                                Total Visitors
+                            </div>
+                            <div class="card-body">
+                                <h2 class="card-title">15</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="card text-center">
+                            <div class="card-header">
+                                Total Unique Visitors
+                            </div>
+                            <div class="card-body">
+                                <h2 class="card-title">20</h2>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+
+            <div class="container mt-5 artile__list">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h4>Article List</h4>
+                    </div>
+                    <div class="col-sm-4 text-right">
+                        <a type="button" class="btn btn-primary ">
+                            <i class="bi bi-clipboard-plus"></i> Create New
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Post Title</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+
+                        {{#each posts}}
+
+                        <tr>
+                            <th scope="row">{{ id }}</th>
+                            <td class="text-left">{{ post_title }}</td>
+                            <td><img style="width:40px; height:5%" src="blog_imgs/{{ post_photo }}"
+                                    alt="{{ post_photo }}" srcset=""></td>
+                            <td>{{ status }}</td>
+                            <td>
+                                <a href="/posts/{{id}}" type="button" class="btn btn-light">
+                                    <i class="bi bi-eye"></i> View
+                                </a>
+                                <a href="/edit/{{id}}" type="button" class="btn btn-light">
+                                    <i class="bi bi-pencil"></i> Edit
+                                </a>
+                                <a href="/delete/{{id}}" type="button" class="btn btn-light">
+                                    <i class="bi bi-x"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+
+                        {{/each}}
+
+                    </tbody>
+                </table>
+                {{ message }}
+            </div>
+
+
+
         </div>
     </div>
 

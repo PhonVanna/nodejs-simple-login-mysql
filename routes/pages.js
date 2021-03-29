@@ -1,11 +1,13 @@
 const express = require('express');
 const authController = require('../controllers/auth');
+const postController = require('../controllers/post');
 
 const router = express.Router();
 
-router.get('/', authController.isLoggedIn, (req, res) => {
+router.get('/', [authController.isLoggedIn, postController.homelistposts], (req, res) => {
     res.render('index', {
-        user: req.user
+        user: req.user,
+        posts: req.posts
     });
 });
 
@@ -27,15 +29,19 @@ router.get('/login', (req, res) => {
 });
 
 
-router.get('/profile', authController.isLoggedIn, (req, res) => {
+router.get('/profile', [authController.isLoggedIn, postController.listposts], (req, res) => {
     if(req.user){
         res.render("profile", {
-            user: req.user
+            user: req.user,
+            posts: req.posts
         });
-    }else{
-        res.redirect('/login');
     }
-    
+    // else{
+    //     res.redirect('/login');
+    // }
 });
+
+
+
 
 module.exports = router;
