@@ -6,7 +6,7 @@
                     <img src="/avatar.png" alt="user profile" srcset="" class="avatar">
                 </div>
                 <div class="card-body">
-                    <h3 class="card-title">User: {{ user.username }}</h3>
+                    <h3 class="card-title">User: {{ user.fullname }}</h3>
                     <h3>Role: {{ user.role }}</h3>
                     <a href="#" class="btn btn-primary">{{ user.email }}</a>
                 </div>
@@ -63,7 +63,7 @@
                 </div>
             </div>
 
-            <div class="container">
+            <div class="container mt-4">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -76,6 +76,7 @@
                     </thead>
                     <tbody class="text-center">
 
+                        {{#if posts}}
                         {{#each posts}}
 
                         <tr>
@@ -85,7 +86,7 @@
                                     alt="{{ post_photo }}" srcset=""></td>
                             <td>{{ status }}</td>
                             <td>
-                                <a href="/posts/{{id}}" type="button" class="btn btn-light">
+                                <a href="/post/{{id}}" type="button" class="btn btn-light">
                                     <i class="bi bi-eye"></i> View
                                 </a>
                                 <a href="/edit/{{id}}" type="button" class="btn btn-light">
@@ -98,6 +99,11 @@
                         </tr>
 
                         {{/each}}
+                        {{else}}
+                        <div class="alert alert-warning" role="alert">
+                            You done have any posts yet!
+                        </div>
+                        {{/if}}
 
                     </tbody>
                 </table>

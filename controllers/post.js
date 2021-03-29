@@ -9,32 +9,38 @@ const db = mysql.createConnection({
 
 
 exports.homelistposts = async (req, res, next) => {
-            // const qrySelect = "SELECT * FROM posts WHERE status='1'";
-            const qrySelect = "SELECT posts.*, users.username, users.user_photo " + 
+    try {
+        const qrySelect = "SELECT posts.*, users.username, users.user_photo " + 
                             "FROM posts LEFT JOIN users ON posts.user_id = users.id WHERE posts.status='1';";
             
-            console.log(qrySelect);
+            // console.log(qrySelect);
             db.query(qrySelect,  async (error, results) => {
                 if(results) {
                     req.posts = results;
                     return next();
                 }
             });
+    } catch (error) {
+        console.log(error);
+    }
+            
 }
 
 exports.listposts = async (req, res, next) => {
     if(req.user){
+
         if(req.user.id){
             try {
-                
                 let user_id = req.user.id;
     
                 const qrySelect = 'SELECT * FROM posts WHERE user_id = ?'
-            
+
                 db.query(qrySelect, [user_id], async (error, results) => {
-                    if(results.length > 0) {
+                    if(results) {
                         req.posts = results;
                         return next();
+                    }else{
+                        console.log(error);
                     }
                 });
             } catch (error) {
