@@ -35,11 +35,29 @@ router.get('/profile', [authController.isLoggedIn, postController.listposts], (r
             user: req.user,
             posts: req.posts
         });
+    }else{
+        res.redirect('/login');
     }
-    // else{
-    //     res.redirect('/login');
-    // }
 });
+
+
+router.get('/add', authController.isLoggedIn, (req, res) => {
+    if(req.user){
+        res.render("create", {
+            user: req.user
+        });
+    }
+});
+
+
+router.post('/add', [authController.isLoggedIn, postController.create], (req, res) => {
+    if(req.user){
+        res.render("create", {
+            user: req.user
+        });
+    }
+});
+
 
 
 

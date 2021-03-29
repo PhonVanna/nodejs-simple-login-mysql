@@ -1,0 +1,46 @@
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            Create New Post
+        </div>
+        <div class="card-body">
+            <form action="/add" method="POST">
+                <div class="mb-3">
+                    <label for="post_title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="post_title" name="post_title" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="post_description" class="form-label">Description</label>
+                    <textarea class="form-control" id="post_description" name="post_description"
+                        style="height: 100px"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <select class="form-control" name="status">
+                        <option selected>Status</option>
+                        <option value="1">Active</option>
+                        <option value="0">Disable</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="post_photo" for="post_photo">Upload</label>
+                    <input type="file" class="form-control" id="post_photo" name="post_photo">
+                </div>
+
+
+                <button type="submit" class="btn btn-primary btn-lg mt-3">Save Now</button>
+
+            </form>
+
+            {{#if message }}
+            {{#if code}}
+            <h4 class="alert alert-success mt-4">{{ message }}</h4>
+            {{else}}
+            <h4 class="alert alert-danger mt-4">{{ message }}</h4>
+            {{/if}}
+            {{/if}}
+        </div>
+    </div>
+</div>
