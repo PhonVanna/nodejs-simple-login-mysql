@@ -1,4 +1,6 @@
 const mysql = require('mysql');
+const path = require('path');
+
 
 const db = mysql.createConnection({
     host: process.env.DATABASE_HOST,
@@ -68,31 +70,51 @@ exports.create = (req, res, next) => {
                 code: false
             });
        }else{
-                    const user_id = req.user.id;
-                    const post_title = req.body.post_title;
-                    const post_description = req.body.post_description;
-                    const post_photo = '3.jpg';
-                    const post_status = req.body.status;
-            
-                    const qryInsert = "INSERT INTO posts SET ?";
-                        
-                    db.query(qryInsert, {user_id: user_id, post_title: post_title, post_description: post_description, post_photo: post_photo, status: post_status}, (error, results) => {
-                        if(error) {
-                            console.log(error);
-                        }else{
-                            console.log(results);
-                            res.status(200).redirect('/profile');
-                        }
-                    });
-        }   
+
+            if(req.files){
+                const target_file = req.files.post_photo;
+                const user_id = req.user.id;
+                const post_title = req.body.post_title;
+                const post_description = req.body.post_description;
+                const post_photo = Date.now() + '-' + target_file.name;
+                const post_status = req.body.status;
+
+
+                const qryInsert = "INSERT INTO posts SET ?";
+                
+                // target_file.mv(path, callback)
+                target_file.mv(path.join(__dirname, '../public/blog_imgs', post_photo), (err) => {
+                    if (err){
+                        return res.render('create', {
+                            message: 'Error File Upload',
+                            code: false
+                        });
+                    }else{
+                        db.query(qryInsert, {user_id: user_id, post_title: post_title, post_description: post_description, post_photo: post_photo, status: post_status}, (error, results) => {
+                            if(error) {
+                                console.log(error);
+                            }else{
+                                console.log(results);
+                                res.status(200).redirect('/profile');
+                            }
+                        });
+                    }
+                })
+                    
+            }else{
+                return res.render('create', {
+                    message: 'Please Upload File',
+                    code: false
+                });
+            }
+        }      
     }else{
-        
         return res.render('create', {
             message: 'Make sure you have input all the columns!',
             code: false
         });
     }
-
+                            
 }
 
 
@@ -158,7 +180,7 @@ exports.updatePost = async (req, res, next) => {
             //         code: false
             //     });
             // }else{
-                let post_photo = req.body.old_image;
+            let post_photo = req.body.old_image;
             // }
 
             const qryUpdate = "UPDATE posts SET ? WHERE posts.id = ? AND user_id = ?";

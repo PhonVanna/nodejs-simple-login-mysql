@@ -4,6 +4,9 @@ const path = require('path');
 const mysql = require('mysql');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
+const fileUpload = require('express-fileupload')
+
+
 
 dotenv.config({ path: './.env'});
 
@@ -18,6 +21,7 @@ const db = mysql.createConnection({
 
 const publicDirectory = path.join(__dirname, './public');
 app.use(express.static(publicDirectory));
+app.use(fileUpload());
 
 // parse url-encoded bodies (as sent by html forms)
 app.use(express.urlencoded({ extended: false}));

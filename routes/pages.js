@@ -51,7 +51,6 @@ router.get('/add', authController.isLoggedIn, (req, res) => {
 
 
 router.post('/add', [authController.isLoggedIn, postController.create], (req, res) => {
-    console.log('Rund');
     if(req.user){
         res.render("create", {
             user: req.user
@@ -62,9 +61,6 @@ router.post('/add', [authController.isLoggedIn, postController.create], (req, re
 
 
 router.get('/edit/:id', authController.isLoggedIn, postController.getSinglePost, (req, res) => {
-
-    // console.log(req.post);
-
     if(req.user){
         res.render("edit", {
             user: req.user,
@@ -81,10 +77,5 @@ router.post('/edit/:id', [authController.isLoggedIn, postController.updatePost],
         });
     }
 });
-
-
-
-
-
 
 module.exports = router;
