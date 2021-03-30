@@ -1,0 +1,55 @@
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            Edit Post
+        </div>
+
+        <div class="card-body">
+            <form action="/edit/{{ post.id }}" method="POST">
+                <div class="mb-3">
+                    <label for="post_title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="post_title" name="post_title"
+                        value="{{ post.post_title }}" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="post_description" class="form-label">Description</label>
+                    <textarea class="form-control" id="post_description" name="post_description"
+                        style="height: 100px">{{ post.post_description }}</textarea>
+                </div>
+
+                <div class="mb-3">
+                    <select class="form-control" name="status">
+                        {{#if post.status}}
+                        <option value="1">Active</option>
+                        {{else}}
+                        <option value="0">Disable</option>
+                        {{/if}}
+                        <option value="Active">Active</option>
+                        <option value="Disable">Disable</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="post_photo" for="post_photo">Upload</label>
+                    <input type="hidden" value="{{ post.post_photo }}" name="old_image" id="old_image">
+                    <input type="file" class="form-control" id="post_photo" name="post_photo">
+                    <img class="mt-2" src="../../blog_imgs/{{ post.post_photo }}" alt="" srcset="" style="width: 15%;">
+                </div>
+
+
+
+                <button type="submit" class="btn btn-primary btn-lg mt-3">Save Now</button>
+
+            </form>
+
+            {{#if message }}
+            {{#if code}}
+            <h4 class="alert alert-success mt-4">{{ message }}</h4>
+            {{else}}
+            <h4 class="alert alert-danger mt-4">{{ message }}</h4>
+            {{/if}}
+            {{/if}}
+        </div>
+    </div>
+</div>
