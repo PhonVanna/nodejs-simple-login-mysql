@@ -78,4 +78,16 @@ router.post('/edit/:id', [authController.isLoggedIn, postController.updatePost],
     }
 });
 
+
+router.get('/delete/:id', [authController.isLoggedIn, postController.deletePost], (req, res) => {
+
+    console.log("click");
+
+    if(req.user){
+        res.render("edit", {
+            user: req.user
+        });
+    }
+});
+
 module.exports = router;

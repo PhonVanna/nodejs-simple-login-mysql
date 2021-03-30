@@ -213,3 +213,33 @@ exports.updatePost = async (req, res, next) => {
      }
             
 }
+
+
+exports.deletePost = async (req, res, next) => {
+
+    console.log(req.params.id);
+
+    if(req.params.id){
+
+        const post_id = req.params.id;
+        const user_id = req.user.id;
+
+        try {
+            const qryDelete = "DELETE FROM posts WHERE posts.id = ? AND posts.user_id = ?";
+            
+            db.query(qryDelete,  [post_id, user_id], async (error) => {
+                if(error){
+                    res.status(200).redirect('/profile');
+                }else{
+                    console.log('success deleted');
+                    res.status(200).redirect('/profile');
+                }
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }else{
+        res.status(200).redirect('/profile');
+    }  
+            
+}
