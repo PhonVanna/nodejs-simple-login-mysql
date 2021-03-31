@@ -155,6 +155,8 @@ exports.getSinglePost = async (req, res, next) => {
 
 
 exports.updatePost = async (req, res, next) => {
+
+    
     if(req.body) {
         if(req.body.post_title === ''){
              return res.render('edit', {
@@ -174,35 +176,65 @@ exports.updatePost = async (req, res, next) => {
 
             const post_id = req.params.id;
              
-            // if(req.body.post_photo === ''){
-            //     return res.render('edit', {
-            //         message: 'Please Upload File',
-            //         code: false
-            //     });
-            // }else{
-            let post_photo = req.body.old_image;
-            // }
+            if(!req.files){
+                let post_photo = req.body.old_image;
 
-            const qryUpdate = "UPDATE posts SET ? WHERE posts.id = ? AND user_id = ?";
+                const qryUpdate = "UPDATE posts SET ? WHERE posts.id = ? AND user_id = ?";
 
-            console.log(qryUpdate);
+                console.log(qryUpdate);
 
-            const updateData = {
-                user_id: user_id, 
-                post_title: post_title, 
-                post_description: post_description, 
-                post_photo: post_photo, 
-                status: post_status
-            };
-                         
-            db.query(qryUpdate, [updateData, post_id, user_id], (error, results) => {
-                if(error) {
-                    console.log(error);
-                }else{
-                    console.log(results);
-                    return res.status(200).redirect('/profile');
-                }
-            });
+                const updateData = {
+                    user_id: user_id, 
+                    post_title: post_title, 
+                    post_description: post_description, 
+                    post_photo: post_photo, 
+                    status: post_status
+                };
+                            
+                db.query(qryUpdate, [updateData, post_id, user_id], (error, results) => {
+                    if(error) {
+                        console.log(error);
+                    }else{
+                        console.log(results);
+                        return res.status(200).redirect('/profile');
+                    }
+                });
+            }else{
+
+                const target_file = req.files.post_photo;
+                const post_photo = Date.now() + '-' + target_file.name;
+
+                // target_file.mv(path, callback)
+                target_file.mv(path.join(__dirname, '../public/blog_imgs', post_photo), (err) => {
+                    if(err){
+                        return res.render('edit', {
+                            message: 'Error File Upload',
+                            code: false
+                        });
+                    }else{
+                        const qryUpdate = "UPDATE posts SET ? WHERE posts.id = ? AND user_id = ?";
+
+                        console.log(qryUpdate);
+
+                        const updateData = {
+                            user_id: user_id, 
+                            post_title: post_title, 
+                            post_description: post_description, 
+                            post_photo: post_photo, 
+                            status: post_status
+                        };
+                                    
+                        db.query(qryUpdate, [updateData, post_id, user_id], (error, results) => {
+                            if(error) {
+                                console.log(error);
+                            }else{
+                                console.log(results);
+                                return res.status(200).redirect('/profile');
+                            }
+                        });
+                    }
+                });
+            }
          }   
      }else{
          

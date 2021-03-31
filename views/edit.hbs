@@ -5,7 +5,7 @@
         </div>
 
         <div class="card-body">
-            <form action="/edit/{{ post.id }}" method="POST">
+            <form action="/edit/{{ post.id }}" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="post_title" class="form-label">Title</label>
                     <input type="text" class="form-control" id="post_title" name="post_title"
